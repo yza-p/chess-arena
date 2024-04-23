@@ -1,14 +1,6 @@
 using Unity.Collections;
+using Unity.Networking.Transport;
 using UnityEngine;
-
-public enum OpCode
-{
-    KEEP_ALIVE = 0,
-    WELCOME = 1,
-    START_GAME = 2,
-    MAKE_MOVE = 4,
-    REMATCH = 5
-}
 
 public class NetMessage : MonoBehaviour
 {
@@ -27,7 +19,7 @@ public class NetMessage : MonoBehaviour
     {
 
     }
-    public virtual void ReceivedOnServer()
+    public virtual void ReceivedOnServer(NetworkConnection cnn)
     {
 
     }

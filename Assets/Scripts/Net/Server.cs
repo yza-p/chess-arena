@@ -102,7 +102,7 @@ public class Server : MonoBehaviour
             {
                 if (cmd == NetworkEvent.Type.Data)
                 {
-                    // NetUtility.OnData(stream, connections[i], this);
+                    NetUtility.OnData(stream, connections[i], this);
                 }
                 else if (cmd == NetworkEvent.Type.Disconnect)
                 {
@@ -116,11 +116,13 @@ public class Server : MonoBehaviour
     }
 
 
+    // Server functions
+
     public void SendToClient(NetworkConnection connection, NetMessage msg)
     {
         DataStreamWriter writer;
         driver.BeginSend(connection, out writer);
-        // msg.Serialize(ref writer);
+        msg.Serialize(ref writer);
         driver.EndSend(writer);
     }
     public void Broadcast(NetMessage msg)
@@ -129,7 +131,7 @@ public class Server : MonoBehaviour
         {
             if (connections[i].IsCreated)
             {
-                // Debug.Log($"Sending {msg.Code} to : {connections[i]}");
+                Debug.Log($"Sending {msg.Code} to : {connections[i]}");
                 SendToClient(connections[i], msg);
             }
         }
