@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class Connect : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static Connect Instance { get; set; }
+
+    private void Awake()
     {
-        
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnCreateRoom()
     {
-        
+        Debug.Log("OnCreateRoom");
     }
+
+    public void OnJoinRoom()
+    {
+        Debug.Log("OnJoinRoom");
+    }
+
+    public void OnCancelConnect()
+    {
+        Debug.Log("OnCancelConnect");
+    }
+
 }
