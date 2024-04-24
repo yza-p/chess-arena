@@ -17,13 +17,6 @@ public class Connect : MonoBehaviour
         Instance = this;
     }
 
-    public void OnButtonPlay(int sceneID)
-    {
-        SceneManager.LoadScene(sceneID);
-        /*server.Init(8007);
-        client.Init("127.0.0.1", 8007);*/
-    }
-
     public void OnCreateRoom()
     {
         server.Init(8230);
@@ -46,5 +39,6 @@ public class Connect : MonoBehaviour
     {
         server.Shutdown();
         client.Shutdown();
+        SceneManager.LoadScene(0);
     }
 }

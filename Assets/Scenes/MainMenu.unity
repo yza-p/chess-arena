@@ -1497,8 +1497,6 @@ GameObject:
   - component: {fileID: 1843619829}
   - component: {fileID: 1843619828}
   - component: {fileID: 1843619831}
-  - component: {fileID: 1843619833}
-  - component: {fileID: 1843619832}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -1571,8 +1569,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1843619831}
-        m_TargetAssemblyTypeName: Connect, Assembly-CSharp
-        m_MethodName: OnButtonPlay
+        m_TargetAssemblyTypeName: Menus, Assembly-CSharp
+        m_MethodName: Play
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1629,37 +1627,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1843619825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a0d9f018bae8284aa17e3f6cce11a82, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dafc7c08ca649247b9648cb3272e180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  server: {fileID: 1843619832}
-  client: {fileID: 1843619833}
-  addressInput: {fileID: 0}
-  loadingOverlay: {fileID: 0}
---- !u!114 &1843619832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843619825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ad98889d097e8649961ebf60853a009, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1843619833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843619825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e928b8eb0a42a7f47878e578c4e081e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
 --- !u!1 &2126599337
 GameObject:
   m_ObjectHideFlags: 0
