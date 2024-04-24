@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Networking.Transport;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -35,6 +36,10 @@ public class Chessboard : MonoBehaviour
     private bool isDragging;
     private bool isWhiteTurn;
 
+    // Multiplayer
+    private int playerCount = -1;
+    private int currentTeam = -1;
+
     private void Awake()
     {
         isWhiteTurn = true;
@@ -42,6 +47,8 @@ public class Chessboard : MonoBehaviour
         GenerateAllTiles(tileSize, TILE_COUNT_X, TILE_COUNT_Y);
         SpawnAllPieces();
         PositionAllPieces();
+
+        RegisterEvents();
     }
 
     private void Update()
@@ -378,4 +385,25 @@ public class Chessboard : MonoBehaviour
 
         return -Vector2Int.one;
     }
+
+
+    // Registers
+    private void RegisterEvents()
+    {
+        NetUtility.S_WELCOME += OnWelcomeServer;
+    }
+    private void UnRegisterEvents()
+    {
+
+    }
+
+    private void OnWelcomeServer(NetMessage msg, NetworkConnection cnn)
+    {
+        // Server side; Client connected, send assigned team
+        NetWelcome nw = msg as NetWelcome;
+        nw.AssignedTeam = ++playerCount;
+
+        Server.Instance.SendToClient(cnn, nw);
+    }
+
 }
