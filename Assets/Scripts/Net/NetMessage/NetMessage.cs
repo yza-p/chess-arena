@@ -2,7 +2,7 @@ using Unity.Collections;
 using Unity.Networking.Transport;
 using UnityEngine;
 
-public class NetMessage : MonoBehaviour
+public class NetMessage
 {
     public OpCode Code { get; set; }
 
@@ -10,7 +10,7 @@ public class NetMessage : MonoBehaviour
     {
         writer.WriteByte((byte)Code);
     }
-    public virtual void Deserialize(ref DataStreamReader reader)
+    public virtual void Deserialize(DataStreamReader reader)
     {
 
     }

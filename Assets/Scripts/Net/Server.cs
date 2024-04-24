@@ -62,13 +62,21 @@ public class Server : MonoBehaviour
         if (!isActive)
             return;
 
+        KeepAlive();
         driver.ScheduleUpdate().Complete();
 
         CleanupConnections();
         AcceptNewConnections();
         UpdateMessagePump();
     }
-
+    private void KeepAlive()
+    {
+        if (Time.time -  lastKeepAlive < keepAliveTickRate)
+        {
+            lastKeepAlive = Time.time;
+            Broadcast(new NetKeepAlive());
+        }
+    }
 
     private void CleanupConnections()
     {
