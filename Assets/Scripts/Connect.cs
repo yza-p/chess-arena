@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Connect : MonoBehaviour
 {
@@ -18,11 +17,18 @@ public class Connect : MonoBehaviour
         Instance = this;
     }
 
+    public void OnButtonPlay(int sceneID)
+    {
+        server.Init(8007);
+        client.Init("127.0.0.1", 8007);
+        SceneManager.LoadScene(sceneID);
+    }
+
     public void OnCreateRoom()
     {
         server.Init(8007);
         client.Init("127.0.0.1", 8007);
-        //loadingOverlay.SetActive(true);
+        loadingOverlay.SetActive(true);
         //Debug.Log("OnCreateRoom");
     }
 
@@ -33,7 +39,7 @@ public class Connect : MonoBehaviour
 
     public void OnCancelConnect()
     {
-        //loadingOverlay.SetActive(false);
+        loadingOverlay.SetActive(false);
     }
 
     public void OnBackButton()
