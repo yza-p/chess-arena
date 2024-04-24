@@ -77,7 +77,6 @@ public class Server : MonoBehaviour
             Broadcast(new NetKeepAlive());
         }
     }
-
     private void CleanupConnections()
     {
         // Cleanup old references to old connections
@@ -90,7 +89,6 @@ public class Server : MonoBehaviour
             }
         }
     }
-
     private void AcceptNewConnections()
     {
         NetworkConnection c;
@@ -99,7 +97,6 @@ public class Server : MonoBehaviour
             connections.Add(c);
         }
     }
-
     private void UpdateMessagePump()
     {
         DataStreamReader stream;

@@ -23,10 +23,10 @@ public class NetKeepAlive : NetMessage
 
     public override void ReceivedOnClient()
     {
-        //NetUtility.C_KEEP_ALIVE?.Invoke(this);
+        NetUtility.C_KEEP_ALIVE?.Invoke(this);
     }
     public override void ReceivedOnServer(NetworkConnection cnn)
     {
-        //NetUtility.S_KEEP_ALIVE?.Invoke(this, cnn);
+        NetUtility.S_KEEP_ALIVE?.Invoke(this, cnn);
     }
 }
