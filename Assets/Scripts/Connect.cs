@@ -32,6 +32,8 @@ public class Connect : MonoBehaviour
 
     public void OnCancelConnect()
     {
+        server.Shutdown();
+        client.Shutdown();
         loadingOverlay.SetActive(false);
     }
 

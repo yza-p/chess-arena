@@ -1668,6 +1668,8 @@ GameObject:
   - component: {fileID: 1211231805}
   - component: {fileID: 1211231812}
   - component: {fileID: 1211231811}
+  - component: {fileID: 1211231814}
+  - component: {fileID: 1211231813}
   m_Layer: 5
   m_Name: Waiting screen
   m_TagString: Untagged
@@ -1687,8 +1689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0d9f018bae8284aa17e3f6cce11a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  server: {fileID: 0}
-  client: {fileID: 0}
+  server: {fileID: 1211231813}
+  client: {fileID: 1211231814}
   addressInput: {fileID: 0}
   loadingOverlay: {fileID: 1211231804}
 --- !u!114 &1211231806
@@ -1839,6 +1841,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211231804}
   m_CullTransparentMesh: 1
+--- !u!114 &1211231813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211231804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad98889d097e8649961ebf60853a009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1211231814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211231804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e928b8eb0a42a7f47878e578c4e081e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1228670206
 GameObject:
   m_ObjectHideFlags: 0

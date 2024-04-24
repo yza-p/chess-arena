@@ -36,7 +36,7 @@ public class Server : MonoBehaviour
         else
         {
             driver.Listen();
-            Debug.Log("CUrrently listening on port " + endpoint.Port);
+            Debug.Log("Currently listening on port " + endpoint.Port);
         }
 
         connections = new NativeList<NetworkConnection>(2, Allocator.Persistent);
@@ -136,7 +136,7 @@ public class Server : MonoBehaviour
         {
             if (connections[i].IsCreated)
             {
-                Debug.Log($"Sending {msg.Code} to : {connections[i]}");
+                // Debug.Log($"Sending {msg.Code} to : {connections[i]}");
                 SendToClient(connections[i], msg);
             }
         }
