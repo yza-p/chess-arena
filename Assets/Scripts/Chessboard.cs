@@ -391,6 +391,7 @@ public class Chessboard : MonoBehaviour
     private void RegisterEvents()
     {
         NetUtility.S_WELCOME += OnWelcomeServer;
+        NetUtility.C_WELCOME += OnWelcomeClient;
     }
     private void UnRegisterEvents()
     {
@@ -404,6 +405,12 @@ public class Chessboard : MonoBehaviour
         nw.AssignedTeam = ++playerCount;
 
         Server.Instance.SendToClient(cnn, nw);
+    }
+    private void OnWelcomeClient(NetMessage msg)
+    {
+        // Client side; unpack message
+        NetWelcome nw = msg as NetWelcome;
+        currentTeam = nw.AssignedTeam;
     }
 
 }
