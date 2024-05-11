@@ -20,6 +20,7 @@ public class Chessboard : MonoBehaviour
     [SerializeField] private Sprite[] whiteSprite;
     [SerializeField] private GameObject victoryScreen;
 
+
     private const int TILE_COUNT_X = 8;
     private const int TILE_COUNT_Y = 8;
     private GameObject[,] tiles;
@@ -411,6 +412,7 @@ public class Chessboard : MonoBehaviour
         // Client side; unpack message
         NetWelcome nw = msg as NetWelcome;
         currentTeam = nw.AssignedTeam;
+        Debug.Log($"My assigned team is {nw.AssignedTeam}");
     }
 
 }
