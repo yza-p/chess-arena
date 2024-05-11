@@ -37,7 +37,7 @@ public class Client : MonoBehaviour
             UnregisterToEvent();
             driver.Dispose();
             isActive = false;
-            connection = default(NetworkConnection);
+            connection = default;
         }
     }
     public void OnDestroy()
@@ -77,12 +77,12 @@ public class Client : MonoBehaviour
             }
             else if (cmd == NetworkEvent.Type.Data)
             {
-                NetUtility.OnData(stream, default(NetworkConnection));
+                NetUtility.OnData(stream, default);
             }
             else if (cmd == NetworkEvent.Type.Disconnect)
             {
                 Debug.Log("Client disconnected from server");
-                connection = default(NetworkConnection);
+                connection = default;
                 connectionDropped?.Invoke();
                 Shutdown();
             }

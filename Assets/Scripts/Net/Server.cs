@@ -85,14 +85,14 @@ public class Server : MonoBehaviour
             if (!connections[i].IsCreated)
             {
                 connections.RemoveAtSwapBack(i);
-                --i;
+                i--;
             }
         }
     }
     private void AcceptNewConnections()
     {
         NetworkConnection c;
-        while ((c = driver.Accept()) != default(NetworkConnection))
+        while ((c = driver.Accept()) != default)
         {
             connections.Add(c);
         }
@@ -112,7 +112,7 @@ public class Server : MonoBehaviour
                 else if (cmd == NetworkEvent.Type.Disconnect)
                 {
                     Debug.Log("Client disconnected from server");
-                    connections[i] = default(NetworkConnection);
+                    connections[i] = default;
                     connectionDropped?.Invoke();
                     Shutdown();
                 }
@@ -126,7 +126,7 @@ public class Server : MonoBehaviour
     public void SendToClient(NetworkConnection connection, NetMessage msg)
     {
         DataStreamWriter writer;
-        driver.BeginSend(connection, out writer);
+        driver.BeginSend(NetworkPipeline.Null, connection, out writer);
         msg.Serialize(ref writer);
         driver.EndSend(writer);
     }
