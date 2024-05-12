@@ -72,9 +72,9 @@ public class Client : MonoBehaviour
         {
             if (cmd == NetworkEvent.Type.Connect)
             {
-                //var nm = new NetWelcome();
-                //nm.AssignedTeam = 1;
-                SendToServer(new NetWelcome());
+                var nm = new NetWelcome();
+                nm.AssignedTeam = 1;
+                SendToServer(nm);
                 Debug.Log("We're connected!");
             }
             else if (cmd == NetworkEvent.Type.Data)

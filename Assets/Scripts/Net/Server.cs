@@ -107,7 +107,6 @@ public class Server : MonoBehaviour
             {
                 if (cmd == NetworkEvent.Type.Data)
                 {
-                    Debug.Log("Receiving message to Server...");
                     NetUtility.OnData(stream, connections[i], this);
                 }
                 else if (cmd == NetworkEvent.Type.Disconnect)

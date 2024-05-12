@@ -1605,6 +1605,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4f6b5f71e317f594f94c2392fe76c7e5, type: 3}
   - {fileID: 21300000, guid: 527324e0a03bff94691e75d23db90bca, type: 3}
   victoryScreen: {fileID: 197409668}
+  connectScreen: {fileID: 0}
 --- !u!1 &465577484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,6 +1753,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1943643519}
     - target: {fileID: 5532940899323152986, guid: 82a3de96f2b3f2f4893158be9ffe0e2e, type: 3}
+      propertyPath: connectScreen
+      value: 
+      objectReference: {fileID: 1060253816}
+    - target: {fileID: 5532940899323152986, guid: 82a3de96f2b3f2f4893158be9ffe0e2e, type: 3}
       propertyPath: victoryScreen
       value: 
       objectReference: {fileID: 809589287}
@@ -1820,7 +1825,6 @@ GameObject:
   - component: {fileID: 494005909}
   - component: {fileID: 494005908}
   - component: {fileID: 494005907}
-  - component: {fileID: 494005906}
   m_Layer: 5
   m_Name: Join
   m_TagString: Untagged
@@ -1848,19 +1852,6 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: -51}
   m_SizeDelta: {x: 200, y: 41.5648}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &494005906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 494005904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dafc7c08ca649247b9648cb3272e180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
 --- !u!114 &494005907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2420,7 +2411,7 @@ GameObject:
   - component: {fileID: 685417341}
   - component: {fileID: 685417340}
   m_Layer: 5
-  m_Name: Waiting connection
+  m_Name: Waiting...
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4615,7 +4606,6 @@ GameObject:
   - component: {fileID: 1849597769}
   - component: {fileID: 1849597768}
   - component: {fileID: 1849597767}
-  - component: {fileID: 1849597770}
   m_Layer: 5
   m_Name: Create
   m_TagString: Untagged
@@ -4737,19 +4727,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849597765}
   m_CullTransparentMesh: 1
---- !u!114 &1849597770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1849597765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dafc7c08ca649247b9648cb3272e180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 685417337}
 --- !u!1 &1877213585
 GameObject:
   m_ObjectHideFlags: 0

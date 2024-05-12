@@ -28,11 +28,11 @@ public class NetWelcome : NetMessage
 
     public override void ReceivedOnClient()
     {
-        Debug.Log("Registered!");
         NetUtility.C_WELCOME?.Invoke(this);
     }
     public override void ReceivedOnServer(NetworkConnection cnn)
     {
+        Debug.Log("Registered!");
         NetUtility.S_WELCOME?.Invoke(this, cnn);
     }
 }

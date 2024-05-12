@@ -28,6 +28,7 @@ public class Connect : MonoBehaviour
     public void OnJoinRoom()
     {
         client.Init(addressInput.text, 8230);
+        loadingOverlay.SetActive(true);
     }
 
     public void OnCancelConnect()
