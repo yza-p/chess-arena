@@ -80,12 +80,12 @@ public class Server : MonoBehaviour
     private void CleanupConnections()
     {
         // Cleanup old references to old connections
-        for (int i = 0; i < connections.Length; i++)
+        for (int i = 0; i < connections.Length; ++i)
         {
             if (!connections[i].IsCreated)
             {
                 connections.RemoveAtSwapBack(i);
-                i--;
+                --i;
             }
         }
     }
@@ -107,6 +107,7 @@ public class Server : MonoBehaviour
             {
                 if (cmd == NetworkEvent.Type.Data)
                 {
+                    Debug.Log("Receiving message to Server...");
                     NetUtility.OnData(stream, connections[i], this);
                 }
                 else if (cmd == NetworkEvent.Type.Disconnect)
@@ -126,7 +127,7 @@ public class Server : MonoBehaviour
     public void SendToClient(NetworkConnection connection, NetMessage msg)
     {
         DataStreamWriter writer;
-        driver.BeginSend(NetworkPipeline.Null, connection, out writer);
+        driver.BeginSend(connection, out writer);
         msg.Serialize(ref writer);
         driver.EndSend(writer);
     }

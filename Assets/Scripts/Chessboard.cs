@@ -393,7 +393,9 @@ public class Chessboard : MonoBehaviour
     {
         NetUtility.S_WELCOME += OnWelcomeServer;
         NetUtility.C_WELCOME += OnWelcomeClient;
+        NetUtility.C_START_GAME += OnStartGameClient;
     }
+
     private void UnRegisterEvents()
     {
 
@@ -404,15 +406,22 @@ public class Chessboard : MonoBehaviour
         // Server side; Client connected, send assigned team
         NetWelcome nw = msg as NetWelcome;
         nw.AssignedTeam = ++playerCount;
-
         Server.Instance.SendToClient(cnn, nw);
+
+        if (playerCount == 1)
+            Server.Instance.Broadcast(new NetStartGame());
     }
     private void OnWelcomeClient(NetMessage msg)
     {
         // Client side; unpack message
         NetWelcome nw = msg as NetWelcome;
         currentTeam = nw.AssignedTeam;
+        
         Debug.Log($"My assigned team is {nw.AssignedTeam}");
+    }
+    private void OnStartGameClient(NetMessage msg)
+    {
+        throw new NotImplementedException();
     }
 
 }
