@@ -79,7 +79,7 @@ public class Client : MonoBehaviour
             }
             else if (cmd == NetworkEvent.Type.Data)
             {
-                NetUtility.OnData(stream, default);
+                NetUtility.OnData(stream, default(NetworkConnection));
             }
             else if (cmd == NetworkEvent.Type.Disconnect)
             {

@@ -112,7 +112,7 @@ public class Server : MonoBehaviour
                 else if (cmd == NetworkEvent.Type.Disconnect)
                 {
                     Debug.Log("Client disconnected from server");
-                    connections[i] = default;
+                    connections[i] = default(NetworkConnection);
                     connectionDropped?.Invoke();
                     Shutdown();
                 }

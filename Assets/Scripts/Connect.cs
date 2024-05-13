@@ -19,15 +19,15 @@ public class Connect : MonoBehaviour
 
     public void OnCreateRoom()
     {
-        server.Init(8230);
-        client.Init("127.0.0.1", 8230);
+        server.Init(6666);
+        client.Init("127.0.0.1", 6666);
         loadingOverlay.SetActive(true);
         //Debug.Log("OnCreateRoom");
     }
 
     public void OnJoinRoom()
     {
-        client.Init(addressInput.text, 8230);
+        client.Init(addressInput.text, 6666);
         loadingOverlay.SetActive(true);
     }
 
