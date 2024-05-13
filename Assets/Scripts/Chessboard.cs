@@ -379,6 +379,9 @@ public class Chessboard : MonoBehaviour
 
         isWhiteTurn = !isWhiteTurn;
 
+        pieceToMove = null;
+        RemoveHighlightTiles();
+
         return;
     }
     private Vector2Int LookupTileIndex(GameObject tileHit)
@@ -396,15 +399,25 @@ public class Chessboard : MonoBehaviour
     private void RegisterEvents()
     {
         NetUtility.S_WELCOME += OnWelcomeServer;
+        NetUtility.S_MAKE_MOVE += OnMakeMoveServer;
+
         NetUtility.C_WELCOME += OnWelcomeClient;
         NetUtility.C_START_GAME += OnStartGameClient;
+        NetUtility.C_MAKE_MOVE += OnMakeMoveClient;
     }
 
     private void UnRegisterEvents()
     {
+        NetUtility.S_WELCOME -= OnWelcomeServer;
+        NetUtility.S_MAKE_MOVE -= OnMakeMoveServer;
 
+        NetUtility.C_WELCOME -= OnWelcomeClient;
+        NetUtility.C_START_GAME -= OnStartGameClient;
+        NetUtility.C_MAKE_MOVE -= OnMakeMoveClient;
     }
 
+
+    // SERVER
     private void OnWelcomeServer(NetMessage msg, NetworkConnection cnn)
     {
         // Server side; Client connected, send assigned team
@@ -415,6 +428,15 @@ public class Chessboard : MonoBehaviour
         if (playerCount == 1)
             Server.Instance.Broadcast(new NetStartGame());
     }
+    private void OnMakeMoveServer(NetMessage msg, NetworkConnection cnn)
+    {
+        // Server side; Client connected, send assigned team
+        NetMakeMove nw = msg as NetMakeMove;
+        Server.Instance.Broadcast(nw);
+    }
+
+
+    // CLIENT
     private void OnWelcomeClient(NetMessage msg)
     {
         // Client side; unpack message
@@ -430,6 +452,18 @@ public class Chessboard : MonoBehaviour
         PositionAllPieces();
         connectScreen.transform.localScale = new Vector3(0, 0, 0);
         inProgress = true;
+    }
+    private void OnMakeMoveClient(NetMessage msg)
+    {
+        NetMakeMove mm = msg as NetMakeMove;
+
+        Debug.Log($"MOVE {mm.teamId}: {mm.originalX},{mm.originalY} -> {mm.destX},{mm.destY}");
+        if (mm.teamId != currentTeam)
+        {
+            ChessPiece target = chessPieces[mm.originalX, mm.originalY];
+            availableMoves = target.GetAvailableMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y);
+            MoveTo(mm.originalX, mm.originalY, mm.destX, mm.destY);
+        }
     }
 
 }
