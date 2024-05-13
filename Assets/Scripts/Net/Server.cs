@@ -80,7 +80,7 @@ public class Server : MonoBehaviour
     private void CleanupConnections()
     {
         // Cleanup old references to old connections
-        for (int i = 0; i < connections.Length; ++i)
+        for (int i = 0; i < connections.Length; i++)
         {
             if (!connections[i].IsCreated)
             {
@@ -92,7 +92,7 @@ public class Server : MonoBehaviour
     private void AcceptNewConnections()
     {
         NetworkConnection c;
-        while ((c = driver.Accept()) != default)
+        while ((c = driver.Accept()) != default(NetworkConnection))
         {
             connections.Add(c);
         }
@@ -136,7 +136,7 @@ public class Server : MonoBehaviour
         {
             if (connections[i].IsCreated)
             {
-                // Debug.Log($"Sending {msg.Code} to : {connections[i]}");
+                Debug.Log($"Sending {msg.Code} to : {connections[i]}");
                 SendToClient(connections[i], msg);
             }
         }

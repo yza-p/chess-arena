@@ -37,7 +37,7 @@ public class Client : MonoBehaviour
             UnregisterToEvent();
             driver.Dispose();
             isActive = false;
-            connection = default;
+            connection = default(NetworkConnection);
         }
     }
     public void OnDestroy()
@@ -72,9 +72,9 @@ public class Client : MonoBehaviour
         {
             if (cmd == NetworkEvent.Type.Connect)
             {
-                var nm = new NetWelcome();
-                nm.AssignedTeam = 1;
-                SendToServer(nm);
+                // var nm = new NetWelcome();
+                // nm.AssignedTeam = 1;
+                SendToServer(new NetWelcome());
                 Debug.Log("We're connected!");
             }
             else if (cmd == NetworkEvent.Type.Data)
@@ -84,7 +84,7 @@ public class Client : MonoBehaviour
             else if (cmd == NetworkEvent.Type.Disconnect)
             {
                 Debug.Log("Client disconnected from server");
-                connection = default;
+                connection = default(NetworkConnection);
                 connectionDropped?.Invoke();
                 Shutdown();
             }
@@ -110,6 +110,7 @@ public class Client : MonoBehaviour
     }
     private void OnKeepAlive(NetMessage nm)
     {
+        // Just send the same message back to server
         SendToServer(nm);
     }
 }
