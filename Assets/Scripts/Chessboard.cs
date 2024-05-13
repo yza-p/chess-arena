@@ -37,7 +37,7 @@ public class Chessboard : MonoBehaviour
 
     // Multiplayer
     private int playerCount = -1;
-    private int currentTeam = 1;
+    private int currentTeam = -1;
     private bool inProgress = false;
 
     private void Start()
@@ -114,12 +114,20 @@ public class Chessboard : MonoBehaviour
             if (pieceToMove != null && Input.GetMouseButtonUp(0)) 
             {
                 isDragging = false;
-                pieceToMove.GetComponent<Renderer>().sortingLayerName = "Default"
+                pieceToMove.GetComponent<Renderer>().sortingLayerName = "Default";
                 Vector2Int previousPosition = new Vector2Int(pieceToMove.currentX, pieceToMove.currentY);
 
                 if (!ContainsValidMove(ref availableMoves, new Vector2(hitPosition.x, hitPosition.y)))
                 {
                     MoveTo(previousPosition.x, previousPosition.y, hitPosition.x, hitPosition.y);
+                    
+                    NetMakeMove nm = new NetMakeMove();
+                    nm.originalX = previousPosition.x;
+                    nm.originalY = previousPosition.y;
+                    nm.destX = hitPosition.x;
+                    nm.destY = hitPosition.y;
+                    nm.teamId = currentTeam;
+                    Client.Instance.SendToServer(nm);
                 }
                 else
                 {
