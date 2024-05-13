@@ -41,14 +41,13 @@ public class Chessboard : MonoBehaviour
     // Multiplayer
     private int playerCount = -1;
     private int currentTeam = 0;
+    private bool inProgress = false;
 
     private void Awake()
     {
         isWhiteTurn = true;
 
         GenerateAllTiles(tileSize, TILE_COUNT_X, TILE_COUNT_Y);
-        SpawnAllPieces();
-        PositionAllPieces();
 
         RegisterEvents();
     }
@@ -63,7 +62,7 @@ public class Chessboard : MonoBehaviour
 
         RaycastHit info;
         Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out info, 100, LayerMask.GetMask("Tile", "Hover", "Highlight")))
+        if (inProgress && Physics.Raycast(ray, out info, 100, LayerMask.GetMask("Tile", "Hover", "Highlight")))
         {
             // Get the board tile that is being hovered
             Vector2Int hitPosition = LookupTileIndex(info.transform.gameObject);
@@ -423,7 +422,10 @@ public class Chessboard : MonoBehaviour
     private void OnStartGameClient(NetMessage msg)
     {
         Debug.Log("Starting game...");
+        SpawnAllPieces();
+        PositionAllPieces();
         connectScreen.SetActive(false);
+        inProgress = true;
     }
 
 }
