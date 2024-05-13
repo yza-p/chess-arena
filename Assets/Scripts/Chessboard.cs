@@ -43,7 +43,7 @@ public class Chessboard : MonoBehaviour
     private int currentTeam = 1;
     private bool inProgress = false;
 
-    private void Awake()
+    private void Start()
     {
         isWhiteTurn = true;
 
@@ -424,7 +424,7 @@ public class Chessboard : MonoBehaviour
         Debug.Log("Starting game...");
         SpawnAllPieces();
         PositionAllPieces();
-        connectScreen.SetActive(false);
+        connectScreen.transform.localScale = new Vector3(0, 0, 0);
         inProgress = true;
     }
 
