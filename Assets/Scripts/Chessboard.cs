@@ -40,7 +40,7 @@ public class Chessboard : MonoBehaviour
 
     // Multiplayer
     private int playerCount = -1;
-    private int currentTeam = 0;
+    private int currentTeam = 1;
     private bool inProgress = false;
 
     private void Awake()
@@ -99,8 +99,8 @@ public class Chessboard : MonoBehaviour
                 if (chessPieces[hitPosition.x, hitPosition.y] != null)
                 {
                     // is it the piece's team turn?
-                    if ((isWhiteTurn && chessPieces[hitPosition.x, hitPosition.y].team == 0) ||
-                        (!isWhiteTurn && chessPieces[hitPosition.x, hitPosition.y].team == 1))
+                    if ((isWhiteTurn && chessPieces[hitPosition.x, hitPosition.y].team == 0 && currentTeam == 0) ||
+                        (!isWhiteTurn && chessPieces[hitPosition.x, hitPosition.y].team == 1 && currentTeam == 1))
                     {
                         pieceToMove = chessPieces[hitPosition.x, hitPosition.y];
                         isDragging = true;
