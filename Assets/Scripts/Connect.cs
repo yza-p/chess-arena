@@ -33,15 +33,19 @@ public class Connect : MonoBehaviour
 
     public void OnCancelConnect()
     {
-        server.Shutdown();
-        client.Shutdown();
+        if (server.isActiveAndEnabled)
+            server.Shutdown();
+        if (client.isActiveAndEnabled)
+            client.Shutdown();
         loadingOverlay.SetActive(false);
     }
 
     public void OnBackButton()
     {
-        server.Shutdown();
-        client.Shutdown();
+        if (server.isActiveAndEnabled)
+            server.Shutdown();
+        if (client.isActiveAndEnabled)
+            client.Shutdown();
         SceneManager.LoadScene(0);
     }
 }
