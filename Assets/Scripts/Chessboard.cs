@@ -114,20 +114,20 @@ public class Chessboard : MonoBehaviour
             if (pieceToMove != null && Input.GetMouseButtonUp(0)) 
             {
                 isDragging = false;
-                pieceToMove.GetComponent<Renderer>().sortingLayerName = "Default";
-
+                pieceToMove.GetComponent<Renderer>().sortingLayerName = "Default"
                 Vector2Int previousPosition = new Vector2Int(pieceToMove.currentX, pieceToMove.currentY);
 
-                bool validMove = MoveTo(pieceToMove, hitPosition.x, hitPosition.y);
-
-                // If illegal move happens, revert piece position
-                if (!validMove)
+                if (!ContainsValidMove(ref availableMoves, new Vector2(hitPosition.x, hitPosition.y)))
+                {
+                    MoveTo(previousPosition.x, previousPosition.y, hitPosition.x, hitPosition.y);
+                }
+                else
+                {
                     pieceToMove.transform.position = GetTileCenter(previousPosition.x, previousPosition.y);
+                    pieceToMove = null;
+                    RemoveHighlightTiles();
+                }
                 
-
-                // after a move, drop the reference of the last piece
-                pieceToMove = null;
-                RemoveHighlightTiles();
             }
         }
         else
@@ -335,12 +335,11 @@ public class Chessboard : MonoBehaviour
 
         return false;
     }
-    private bool MoveTo(ChessPiece cp, int x, int y)
+    private void MoveTo(int originalX, int originalY, int x, int y)
     {
-        if (!ContainsValidMove(ref availableMoves, new Vector2(x, y)))
-            return false;
 
-        Vector2Int previousPosition = new Vector2Int(cp.currentX, cp.currentY);
+        ChessPiece cp = chessPieces[originalX, originalY];
+        Vector2Int previousPosition = new Vector2Int(originalX, originalY);
 
         // Is there another piece on the target position?
         if (chessPieces[x, y] != null)
@@ -349,7 +348,7 @@ public class Chessboard : MonoBehaviour
             
             // Cancel move if the other piece is from same team
             if (cp.team == otherPiece.team)
-                return false;
+                return;
 
             // Capture the otherpiece if it's from other team
             if (otherPiece.team == 0)
@@ -372,7 +371,7 @@ public class Chessboard : MonoBehaviour
 
         isWhiteTurn = !isWhiteTurn;
 
-        return true;
+        return;
     }
     private Vector2Int LookupTileIndex(GameObject tileHit)
     {
