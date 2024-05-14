@@ -10,6 +10,7 @@ public class Server : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Debug.Log("Server script is ok!");
     }
 
     public NetworkDriver driver;

@@ -10,6 +10,7 @@ public class Client : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Debug.Log("Client script is ok!");
     }
 
     public NetworkDriver driver;

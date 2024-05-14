@@ -47,6 +47,7 @@ public class Chessboard : MonoBehaviour
         GenerateAllTiles(tileSize, TILE_COUNT_X, TILE_COUNT_Y);
 
         RegisterEvents();
+        Debug.Log($"Server: {Server.Instance.enabled}; Client: {Client.Instance.enabled}");
     }
 
     private void Update()

@@ -15,19 +15,20 @@ public class Connect : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Debug.Log("Connect screen script is ok!");
     }
 
     public void OnCreateRoom()
     {
-        server.Init(6666);
-        client.Init("127.0.0.1", 6666);
+        server.Init(6039);
+        client.Init("127.0.0.1", 6039);
         loadingOverlay.SetActive(true);
         //Debug.Log("OnCreateRoom");
     }
 
     public void OnJoinRoom()
     {
-        client.Init(addressInput.text, 6666);
+        client.Init(addressInput.text, 6039);
         loadingOverlay.SetActive(true);
     }
 
