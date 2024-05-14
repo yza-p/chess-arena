@@ -45,6 +45,8 @@ public class Chessboard : MonoBehaviour
         isWhiteTurn = true;
 
         GenerateAllTiles(tileSize, TILE_COUNT_X, TILE_COUNT_Y);
+        SpawnAllPieces();
+        PositionAllPieces();
 
         RegisterEvents();
         Debug.Log($"Server: {Server.Instance.enabled}; Client: {Client.Instance.enabled}");
@@ -212,31 +214,31 @@ public class Chessboard : MonoBehaviour
     {
         chessPieces = new ChessPiece[TILE_COUNT_X, TILE_COUNT_Y];
 
-        int otherTeam = (currentTeam == 0) ? 1 : 0;
+        int whiteTeam = 0, blackTeam = 1;
 
         // White Team
-        chessPieces[0, 0] = SpawnSinglePiece(ChessPieceType.Rook, currentTeam);
-        chessPieces[1, 0] = SpawnSinglePiece(ChessPieceType.Knight, currentTeam);
-        chessPieces[2, 0] = SpawnSinglePiece(ChessPieceType.Bishop, currentTeam);
-        chessPieces[3, 0] = SpawnSinglePiece(ChessPieceType.Queen, currentTeam);
-        chessPieces[4, 0] = SpawnSinglePiece(ChessPieceType.King, currentTeam);
-        chessPieces[5, 0] = SpawnSinglePiece(ChessPieceType.Bishop, currentTeam);
-        chessPieces[6, 0] = SpawnSinglePiece(ChessPieceType.Knight, currentTeam);
-        chessPieces[7, 0] = SpawnSinglePiece(ChessPieceType.Rook, currentTeam);
+        chessPieces[0, 0] = SpawnSinglePiece(ChessPieceType.Rook, whiteTeam);
+        chessPieces[1, 0] = SpawnSinglePiece(ChessPieceType.Knight, whiteTeam);
+        chessPieces[2, 0] = SpawnSinglePiece(ChessPieceType.Bishop, whiteTeam);
+        chessPieces[3, 0] = SpawnSinglePiece(ChessPieceType.Queen, whiteTeam);
+        chessPieces[4, 0] = SpawnSinglePiece(ChessPieceType.King, whiteTeam);
+        chessPieces[5, 0] = SpawnSinglePiece(ChessPieceType.Bishop, whiteTeam);
+        chessPieces[6, 0] = SpawnSinglePiece(ChessPieceType.Knight, whiteTeam);
+        chessPieces[7, 0] = SpawnSinglePiece(ChessPieceType.Rook, whiteTeam);
         for (int i = 0; i < TILE_COUNT_X; i++)
-            chessPieces[i, 1] = SpawnSinglePiece(ChessPieceType.Pawn, currentTeam);
+            chessPieces[i, 1] = SpawnSinglePiece(ChessPieceType.Pawn, whiteTeam);
 
         // Black Team
-        chessPieces[0, 7] = SpawnSinglePiece(ChessPieceType.Rook, otherTeam);
-        chessPieces[1, 7] = SpawnSinglePiece(ChessPieceType.Knight, otherTeam);
-        chessPieces[2, 7] = SpawnSinglePiece(ChessPieceType.Bishop, otherTeam);
-        chessPieces[3, 7] = SpawnSinglePiece(ChessPieceType.Queen, otherTeam);
-        chessPieces[4, 7] = SpawnSinglePiece(ChessPieceType.King, otherTeam);
-        chessPieces[5, 7] = SpawnSinglePiece(ChessPieceType.Bishop, otherTeam);
-        chessPieces[6, 7] = SpawnSinglePiece(ChessPieceType.Knight, otherTeam);
-        chessPieces[7, 7] = SpawnSinglePiece(ChessPieceType.Rook, otherTeam);
+        chessPieces[0, 7] = SpawnSinglePiece(ChessPieceType.Rook, blackTeam);
+        chessPieces[1, 7] = SpawnSinglePiece(ChessPieceType.Knight, blackTeam);
+        chessPieces[2, 7] = SpawnSinglePiece(ChessPieceType.Bishop, blackTeam);
+        chessPieces[3, 7] = SpawnSinglePiece(ChessPieceType.Queen, blackTeam);
+        chessPieces[4, 7] = SpawnSinglePiece(ChessPieceType.King, blackTeam);
+        chessPieces[5, 7] = SpawnSinglePiece(ChessPieceType.Bishop, blackTeam);
+        chessPieces[6, 7] = SpawnSinglePiece(ChessPieceType.Knight, blackTeam);
+        chessPieces[7, 7] = SpawnSinglePiece(ChessPieceType.Rook, blackTeam);
         for (int i = 0; i < TILE_COUNT_X; i++)
-            chessPieces[i, 6] = SpawnSinglePiece(ChessPieceType.Pawn, otherTeam);
+            chessPieces[i, 6] = SpawnSinglePiece(ChessPieceType.Pawn, blackTeam);
 
     }
     private ChessPiece SpawnSinglePiece(ChessPieceType type, int team)
@@ -449,8 +451,6 @@ public class Chessboard : MonoBehaviour
     private void OnStartGameClient(NetMessage msg)
     {
         Debug.Log("Starting game...");
-        SpawnAllPieces();
-        PositionAllPieces();
         connectScreen.transform.localScale = new Vector3(0, 0, 0);
         inProgress = true;
     }
