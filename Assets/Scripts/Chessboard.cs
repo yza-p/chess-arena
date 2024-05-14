@@ -118,7 +118,7 @@ public class Chessboard : MonoBehaviour
                 pieceToMove.GetComponent<Renderer>().sortingLayerName = "Default";
                 Vector2Int previousPosition = new Vector2Int(pieceToMove.currentX, pieceToMove.currentY);
 
-                if (!ContainsValidMove(ref availableMoves, new Vector2(hitPosition.x, hitPosition.y)))
+                if (ContainsValidMove(ref availableMoves, new Vector2(hitPosition.x, hitPosition.y)))
                 {
                     MoveTo(previousPosition.x, previousPosition.y, hitPosition.x, hitPosition.y);
                     
@@ -380,7 +380,7 @@ public class Chessboard : MonoBehaviour
 
         isWhiteTurn = !isWhiteTurn;
 
-        pieceToMove = null;
+        if (pieceToMove) pieceToMove = null;
         RemoveHighlightTiles();
 
         return;
